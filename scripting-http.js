@@ -7,6 +7,10 @@ request.get('https://sytantris.github.io/http-examples/future.jpg')
         throw err;
     })
     .on('response', function(response) {
+        console.log('downloading image...')
         console.log(response.statusMessage, response.headers['content-type'])
     })
-    .pipe(fs.createWriteStream('./future.jpg'));
+    .pipe(fs.createWriteStream('./future.jpg'))
+    .on('end', function(response) {
+        console.log("Download complete");
+    })
